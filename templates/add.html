@@ -2,11 +2,13 @@
 {% block content %}
 <center>
     <section class="form">
-        <form action="addf" method="POST">
+        <form action="addf" method="POST" enctype="multipart/form-data">
             <h1>Title</h1>
             <input type="text" name="title">
             <h1>Post</h1>
             <textarea name="post" id="" cols="30" rows="10"></textarea>
+            <br>
+            <input type="file" name="file" value="" accept="image/jpeg, image/jpeg, image/gif, image/x-png, image/x-MS-bmp, image/tiff"><br>
             <br>
             <input type="submit">
         </form>
