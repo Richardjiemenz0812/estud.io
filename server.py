@@ -13,22 +13,47 @@ def index():
     rd=r.scan()
     list=str(rd).replace("(0, [b","").replace("])","").replace(", b","").replace("","").replace("(0, [","").split("'")
     print(list)
-    return render_template("index.html",list=list)
+    pl=""
+    for i in list:
+        print(i)
+        print(r.type(i))
+        print("---------------------")
+        if i != "":
+            type=r.type(i)
+            type=str(type)
+            if type == "b'list'":
+                print("es una lista!")
+                pl=str(pl) + i + ","
+    print(pl)
+    pl=pl.split(",")
+    return render_template("index.html",list=pl)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/login',methods=['POST'])
+def loginp():
+    name=request.form.get('name')
+    pwd=request.form.get('pwd')
+    print(name)
+    print(pwd)
+    
+    return redirect('/')
 
 @app.route('/search')
 def search():
-    req=request.args.get('q')
-    pos=r.lrange(req,0,-1)
-    list=str(pos).replace("(0, [b","").replace("])","").replace(", b",""
-    ).replace("","").replace("(0, [","").replace("[b","").replace("]","").split("'")
-    print(list)
-    title=list[5]
-    post=list[3]
-    img=list[1]
-    post=str(post).replace("[b'","").replace("']","").replace("\\r\\n","<br>")
-    print(title)
-    return render_template("/search.html",title=title,post=post,img=img)
-
+    q=request.args.get('q')
+    con=r.lrange(q,1,1)
+    con=str(con).replace("[b'","").replace("']","").replace("\\r\\n","<br>").replace('[b"',"").replace('"]',"")
+    try:
+        img = r.lrange(q,0,0)
+        img=str(img).replace("[b'","").replace("']","")
+    except expression as identifier:
+        pass
+    print()
+    return render_template('search.html',title=q,post=con,img=img)
+    
 @app.route('/add')
 def add():
     return render_template("add.html")
