@@ -1,9 +1,9 @@
+/****************************************body********************************************************/
 body,html{
     height: 100%;
     margin: 0;
-    background-color: ;
 }
-
+/***************************************banners******************************************************/
 .banner{
     background-image: url("/static/bg.jpg");
     color: white;
@@ -26,7 +26,7 @@ body,html{
 
 .banner-text{
     text-align: center;
-    top: 25%;
+    top: 20%;
     left: 45%;
     position: absolute;
     text-decoration: none;
@@ -36,23 +36,23 @@ body,html{
 .banner a,.banner2 a{
   color: white;
 }
-
+/**********************************************************nav bar*******************************************/
 #ul-nav {
     list-style-type: none;
-    position: fixed;
     margin: 0;
     padding: 0;
     background-color: #333;
-    float: right;
+    overflow: hidden;
     height: 100%;
+    position: fixed;
   }
   
  
   li a {
     display: block;
     color: white;
-    text-align: center;
     padding: 14px 16px;
+    text-align: center;
     text-decoration: none;
     border-bottom: 1px solid white;
   }
@@ -69,4 +69,10 @@ body,html{
 
 .post{
   width: 100%;
+}
+/***************************************************responsiveness**********************************/
+@media screen and (max-width: 600px){
+  li a{float: none;}
+  #ul-nav{position: unset;}
+  .banner-text{top: 50%;}
 }
