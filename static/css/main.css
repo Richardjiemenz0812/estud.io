@@ -33,6 +33,15 @@ body,html{
     color: white;
 }
 
+.banner-text2{
+  text-align: center;
+  top: 20%;
+  left: 45%;
+  position: absolute;
+  text-decoration: none;
+  color: white;
+}
+
 .banner a,.banner2 a{
   color: white;
 }
@@ -70,9 +79,18 @@ body,html{
 .post{
   width: 100%;
 }
+
+.cont{
+  margin-left: 5%;
+}
 /***************************************************responsiveness**********************************/
 @media screen and (max-width: 600px){
   li a{float: none;}
-  #ul-nav{position: unset;}
-  .banner-text{top: 50%;}
+  #ul-nav{position: relative;}
+  .banner-text{top: 55%; left: 40%;}
+  .banner-text a{color: #111;}
+  .banner2{height: 30%;}
+  .banner-text2{text-align: center; top: 40%; left: 40%; position: absolute; text-decoration: none; color: white;}
+  .cont{margin-left: 0%;}
+  
 }
