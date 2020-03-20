@@ -83,6 +83,11 @@ body,html{
 .cont{
   margin-left: 5%;
 }
+
+.rate{
+  margin-left: 95%;
+}
+
 /***************************************************responsiveness**********************************/
 @media screen and (max-width: 600px){
   li a{float: none;}
@@ -92,5 +97,6 @@ body,html{
   .banner2{height: 30%;}
   .banner-text2{text-align: center; top: 40%; left: 40%; position: absolute; text-decoration: none; color: white;}
   .cont{margin-left: 0%;}
+  .rate{margin-left: 85%;}
   
 }
