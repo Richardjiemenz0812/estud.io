@@ -111,7 +111,7 @@ def add():
     if user != None:
         return render_template("add.html")
     else:
-        return render_template('/login.html',msg="before write a post you must login")
+        return render_template('/login.html',msg="before write a post or give feedback you must login")
 
 @app.route('/addf', methods=['POST'])
 def addf():
@@ -147,5 +147,12 @@ def like():
             return redirect('/')
     else:
         return redirect("/add")
+
+@app.route("/chpwd", methods=["POST"])
+def chpwd():
+    user=request.cookies.get("user")
+    pwd=request.form.get("pwd")
+    r.hset(user,"pwd",pwd)
+    return ("/")
 
 app.run(debug=True,host="0.0.0.0")

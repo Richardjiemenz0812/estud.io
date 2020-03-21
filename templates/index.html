@@ -11,9 +11,9 @@
 <body>
     <div>
         <ul id="ul-nav">
-            <li><a href="/"> <i class="material-icons">home</i></a></li>
-            <li><a href="/add"><i class="material-icons">add</i></a></li>
-            <li><a href="/login"><i class="material-icons">face</i></a></li>
+            <li class="li-nav"><a href="/"> <i class="material-icons">home</i></a></li>
+            <li class="li-nav"><a href="/add"><i class="material-icons">add</i></a></li>
+            <li class="li-nav"><a href="/login"><i class="material-icons">face</i></a></li>
         </ul>
     </div>
     <header class="banner">
@@ -28,12 +28,14 @@
         {% if item != "" %}
             <li>
                 <a href="/search?q={{item}}" class="list-links">
-                {{item}}
+                <b>{{item}}</b>
                 </a><br><br>
             </li>
         {% endif %}
         {% endfor %}
         </ul>
     </section>
+    <a onclick="menu()"><i class="material-icons">menu</i></a>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
