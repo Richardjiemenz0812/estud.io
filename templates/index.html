@@ -23,19 +23,22 @@
         </div>
     </header>
     <br>
-    <section class="section">
-        <ul>
-        {% for item in list %}
-        {% if item != "" %}
+    
+    <div>
+        <div class="cont"><p><h1>Posts:</h1></p></div>
+        <center>
+            {% for item in list %}
+            {% if item != "" %}
             <li>
                 <a href="/search?q={{item}}" class="list-links">
                 <b>{{item}}</b>
                 </a><br><br>
             </li>
-        {% endif %}
-        {% endfor %}
-        </ul>
-    </section>
+            {% endif %}
+            {% endfor %}
+        </center>
+    </div>
+
     <a onclick="menu()"><i class="material-icons">menu</i></a>
     <script src="/static/js/main.js"></script>
 </body>

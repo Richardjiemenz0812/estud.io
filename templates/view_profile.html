@@ -2,13 +2,24 @@
 {% block content %}
 <div>
     <center>
-        <h1>User Name:</h1>
+        <h1>Name:</h1>
         {{ name }}
         <br>
         <br>
-        <h1>pts</h1>
+        points: {{ pts }}
         <br>
-        {{ pts }}
+        <br>
+        <h3>Posts published by: {{ name }}</h3>
+        number of articles published: {{ n }}
+        {% for item in posts %}
+        {% if item != "" %}
+            <li>
+                <a href="/search?q={{item}}" class="list-links">
+                <b>{{item}}</b>
+                </a><br><br>
+            </li>
+        {% endif %}
+        {% endfor %}
     </center>
 </div>
 {% endblock content %}
