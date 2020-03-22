@@ -13,15 +13,16 @@
     <br>
     <br>
     <h3>Posts published by: You</h3>
-    
-    <a href="/del_post" style="color: red; float:right;">borrar post</a>
+    <form action="#" method="post">
+        <a href="#" style="color: red; float:right;">borrar post</a>
+    </form>
        number of articles published: {{ n }}
 </div>
 <center>
         {% for item in posts %}
         {% if item != "" %}
-            <li>
-                <a href="/search?q={{item}}" class="list-links">
+            <li class="del">
+                <a class="del" href="/del?q={{item}}&user={{user}}" class="list-links">
                 <b>{{item}}</b>
                 </a><br><br>
             </li>

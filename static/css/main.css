@@ -117,6 +117,10 @@ textarea{
   width: 100%;
 }
 
+.del{
+  color: red;
+}
+
 /***************************************************responsiveness**********************************/
 @media screen and (max-width: 1020px){
   .cont{margin-left: 10%;}
