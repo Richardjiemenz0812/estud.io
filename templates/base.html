@@ -10,19 +10,19 @@
 
 </head>
 <body>
-    <div>
+    <div id="nav-bar">
         <ul id="ul-nav">
-            <li class="li-nav"><a href="/"> <i class="material-icons">home</i></a></li>
-            <li class="li-nav"><a href="/add"><i class="material-icons">add</i></a></li>
-            <li class="li-nav"><a href="/login"><i class="material-icons">face</i></a></li>
+            <li class="li-nav"><a href="/"><i class="material-icons">home</i></a></li>
+            <li class="li-nav" id="center"><a href="/add" id="add"><i class="material-icons">add</i></a></li>
+            <li class="li-nav" id="right"><a href="/login" id="profile"><i class="material-icons">face</i></a></li>
         </ul>
     </div>
     <header class="banner2">
         <div class="banner-text2">
-            <h1><a href="/">Estud.io</a></h1>
+            <center><h1><a href="/">Estud.io</a></h1></center>
         </div>
     </header>
-
+    <script src="/static/js/main.js"></script>
     <div class="cont">
         {% block content %}
         

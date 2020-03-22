@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Name:</h1>{{ name }}
-<br>
-<br>
-<br>
-<h2>Password:</h2>
-<form action="/chpwd" method="POST"><input name="pwd" type="text" value="{{pwd}}"> <input type="submit" value="change password"></form>
-<br>
-<br>
-points: {{ pts }}
-<br>
-<br>
-<br>
-<br>
-<button onclick="delcookie()" class="rate">log off</button>
+<center>
+    <h1>Name:</h1>{{ name }}
+    <br>
+    <br>
+    <br>
+    <h2>Password:</h2>
+    <form action="/chpwd" method="POST"><input name="pwd" type="text" value="{{pwd}}"> <input type="submit" value="change password"></form>
+    <br>
+    <br>
+    points: {{ pts }}
+    <br>
+    <br>
+    <br>
+    <br>
+</center>
 
-<script src="/static/js/main.js"></script>
+<script>
+    document.getElementById("profile").style.color = "#4CAF50"
+    document.getElementById("profile").style.backgroundColor = "#111"
+</script>
+<a href="/logout">log out</a>
+
+
 
 {% endblock content %}
