@@ -166,4 +166,12 @@ def logout():
     res.set_cookie("user",user,0)
     return res
 
+@app.route("/user")
+def user():
+    user=request.args.get("q")
+    user="user:"+user
+    user_name=str(r.hget(user,"name")).replace("b'","").replace("'","")
+    user_pts=str(r.hget(user,"pts")).replace("b'","").replace("'","")
+    return render_template("/view_profile.html",name=user_name,pts=user_pts)
+
 app.run(debug=True,host="0.0.0.0")

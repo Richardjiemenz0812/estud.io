@@ -94,7 +94,9 @@ body,html{
 }
 
 .rate{
-  margin-left: 95%;
+  position: fixed;
+  left: 95%;
+  top: 95%;
 }
 
 .rate a{
@@ -108,7 +110,7 @@ body,html{
   #post{margin: 0;}
 }
 @media screen and (max-width: 600px){
-  body{font-size: 16px;}
+  body{font-size: 18px;}
   .li-nav a{float: left; border-bottom: none;}
   li{list-style-type: none; margin: 0;}
   #ul-nav{position: fixed; top: 90%; float: left; width: 100%; height: 10%;}
@@ -117,9 +119,10 @@ body,html{
   .banner2{height: 30%;}
   .banner-text2{text-align: center; top: 20%; text-decoration: none; color: white;}
   .cont{margin-left: 0%; margin-bottom: 70px;}
-  .rate{margin-left: 85%;}
   #right{float: right;}
   #center{margin-left: 45%;}
   #post{margin: 0; margin-left: 10px;}
+  .rate{position: unset;}
+}
   
 }

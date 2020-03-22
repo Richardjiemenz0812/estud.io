@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
+
 <center>
     <h1>{{ title }}</h1>
 </center>
@@ -11,12 +13,11 @@
     <img src="/static/imgs/{{img}}" width="300" height="200" alt="">
 </center>
 <div>
-  published by: {{ by }}
-
+  published by: <a href="/user?q={{ by }}">{{ by }}</a>
   <p class="rate">
     <a href="/like?q=1&by={{by}}"><i class="material-icons">thumb_up</i></a>
     <a href="/"><i class="material-icons">thumb_down</i></a>
-  </p>
+  </p>  
 </div>
 
 <script>
