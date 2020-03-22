@@ -120,7 +120,7 @@ def loginp():
                     p=str(r.hget(user,"pwd")).replace("b'","").replace("'","")
                     if p == pwd:
                         print("access")
-                        res=make_response(redirect("/"))
+                        res=make_response(redirect("/login"))
                         res.set_cookie("user",user)
                         return res
     return redirect('/login')
