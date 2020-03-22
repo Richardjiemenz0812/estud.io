@@ -155,4 +155,15 @@ def chpwd():
     r.hset(user,"pwd",pwd)
     return ("/")
 
+@app.route("/sw.js")
+def sw():
+    return app.send_static_file("/static/js/sw.js")
+
+@app.route("/logout")
+def logout():
+    user=request.cookies.get("user")
+    res=make_response(redirect("/"))
+    res.set_cookie("user",user,0)
+    return res
+
 app.run(debug=True,host="0.0.0.0")
