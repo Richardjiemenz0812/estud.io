@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<center>
+<div class="data">
     <h1>Name:</h1>{{ name }}
     <br>
     <br>
@@ -15,6 +14,8 @@
     <br>
     <h3>Posts published by: You</h3>
         number of articles published: {{ n }}
+</div>
+<center>
         {% for item in posts %}
         {% if item != "" %}
             <li>
