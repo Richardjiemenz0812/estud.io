@@ -13,8 +13,17 @@
     points: {{ pts }}
     <br>
     <br>
-    <br>
-    <br>
+    <h3>Posts published by: You</h3>
+        number of articles published: {{ n }}
+        {% for item in posts %}
+        {% if item != "" %}
+            <li>
+                <a href="/search?q={{item}}" class="list-links">
+                <b>{{item}}</b>
+                </a><br><br>
+            </li>
+        {% endif %}
+        {% endfor %}
 </center>
 
 <script>

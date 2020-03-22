@@ -46,7 +46,48 @@ def profile():
         pwd=str(pwd).replace("b'","").replace("'","")
         pts=r.hget(user,"pts")
         pts=str(pts).replace("b'","").replace("'","")
-        return render_template("/profile.html",name=name,pwd=pwd,pts=pts)
+        rd=r.scan()
+        list=str(rd).replace("(0, [b","").replace("])","").replace(", b","").replace("","").replace("(0, [","").split("'")
+        print(list)
+        pl=""
+        for i in list:
+            print(i)
+            print(r.type(i))
+            print("---------------------")
+            if i != "":
+                type=r.type(i)
+                type=str(type)
+                if type == "b'list'":
+                    print("es una lista!")
+                    print("########################################")
+                    pl=str(pl) + i + ","
+                    print(pl)
+                    print("##################################")
+                    ub=pl.split(",")
+                    print(ub)
+                    list2=""
+                    for u in ub:
+                        if u != "":
+                            print(u)
+                            ulist=r.lrange(u,3,3)
+                            print(ulist)
+                            print("-------------------------------")
+                            print(user)
+                            print("-------------------------------")
+                            ulist=str(ulist)
+                            print("#"+ulist)
+                            ulist=ulist.replace("[b'","").replace("']","")
+                            print("="+ulist)
+                            if user == ulist:
+                                print("exito!!!!!!!!!!!!!!!!!!!!!!!!")
+                                list2=list2+u+","
+                            print(list2)
+                            
+                    
+        y=list2.split(",")
+        n=len(y)
+        n=n-1           
+        return render_template("/profile.html",name=name,pwd=pwd,pts=pts,posts=y,n=n)
     else:
         return redirect("/login")
 
@@ -211,7 +252,8 @@ def user():
                         
                 
     y=list2.split(",")
-    n=len(y)           
+    n=len(y)
+    n=n-1          
     return render_template("/view_profile.html",name=user_name,pts=user_pts,posts=y,n=n)
 
 app.run(debug=True,host="0.0.0.0")
