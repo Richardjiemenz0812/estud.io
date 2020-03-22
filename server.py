@@ -5,6 +5,7 @@ import os
 
 app = Flask(__name__)
 r=FlaskRedis(app)
+app.secret_key = "key"
 
 path_folder='static/imgs'
 
@@ -30,15 +31,16 @@ def index():
 
 @app.route('/login')
 def login():
-    user=request.cookies.get("user")
-    if user != None:
-        return redirect("/profile")
+    if "user" in session:
+        user=session["user"]
+        if user != None:
+            return redirect("/profile")
     else:
         return render_template("/login.html")
 
 @app.route("/profile")
 def profile():
-    user=request.cookies.get("user")
+    user=session["user"]
     if user != None:
         name=r.hget(user,"name")
         name=str(name).replace("b'","").replace("'","")
@@ -120,15 +122,14 @@ def loginp():
                     p=str(r.hget(user,"pwd")).replace("b'","").replace("'","")
                     if p == pwd:
                         print("access")
-                        res=make_response(redirect("/login"))
-                        res.set_cookie("user",user)
-                        return res
+                        session["user"]= user
+                        return redirect("/login")
     return redirect('/login')
 
 @app.route("/test")
 def test():
-    p=request.cookies.get("user")
-    return p
+    
+    return session["user"]
 
 @app.route('/search')
 def search():
@@ -148,15 +149,16 @@ def search():
     
 @app.route('/add')
 def add():
-    user=request.cookies.get("user")
-    if user != None:
-        return render_template("add.html")
+    if "user" in session:
+        user=session["user"]
+        if user != None:
+            return render_template("add.html")
     else:
         return render_template('/login.html',msg="before write a post or give feedback you must login")
 
 @app.route('/addf', methods=['POST'])
 def addf():
-    user=str(request.cookies.get("user"))
+    user=str(session["user"])
     print(user)
     title=request.form.get('title')
     post=request.form.get('post')
@@ -172,29 +174,30 @@ def addf():
 
 @app.route("/like")
 def like():
-    user=request.cookies.get("user")
-    q=request.args.get("q")
-    p=request.args.get("by")
-    userp="user:"+ p
-    print(userp)
-    pts=0
-    if user != None:
-        if q == "1":
-            pts=r.hget(userp,"pts")
-            print(pts)
-            pts=int(pts)+1
-            print(int(pts))
-            r.hset(userp,"pts",pts)
-            return redirect('/')
+    if "user" in session:
+        user=session['user']
+        q=request.args.get("q")
+        p=request.args.get("by")
+        userp="user:"+ p
+        print(userp)
+        pts=0
+        if user != None:
+            if q == "1":
+                pts=r.hget(userp,"pts")
+                print(pts)
+                pts=int(pts)+1
+                print(int(pts))
+                r.hset(userp,"pts",pts)
+                return redirect('/')
     else:
         return redirect("/add")
 
 @app.route("/chpwd", methods=["POST"])
 def chpwd():
-    user=request.cookies.get("user")
+    user=session['user']
     pwd=request.form.get("pwd")
     r.hset(user,"pwd",pwd)
-    return ("/")
+    return redirect("/")
 
 @app.route("/sw.js")
 def sw():
@@ -202,7 +205,7 @@ def sw():
 
 @app.route("/logout")
 def logout():
-    user=request.cookies.get("user")
+    user=session['user']
     res=make_response(redirect("/"))
     res.set_cookie("user",user,0)
     return res
