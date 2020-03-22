@@ -207,7 +207,7 @@ def sw():
 def logout():
     user=session['user']
     res=make_response(redirect("/"))
-    res.set_cookie("user",user,0)
+    res.set_cookie("session",user,0)
     return res
 
 @app.route("/user")
