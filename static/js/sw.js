@@ -1,13 +1,23 @@
-const cacheName = 'estud.io-v1'
-const staticAssets = [
-    "/static/css/main.css",
-    "/static/js/main.js"]
+const files = [
+    '/',
+    '/profile',
+    '/add',
+    '/static/css/main.css',
+    'https://fonts.googleapis.com/icon?family=Material+Icons',
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css',
+    '/static/bg.jpg'
+]
 
-self.addEventListener('install', event => {
-    const cache = caches.open(cacheName)
-    cache.addAll(staticAssets)
-});
+self.addEventListener("install",evt =>{
+    caches.open("cache").then(cache =>{
+        cache.addAll(files)
+    })
+})
 
-self.addEventListener('activate', event => {
-    self.clients.claim()
-});
+self.addEventListener("fetch",evt =>{
+    evt.respondWith(
+        caches.match(evt.request).then(cachesRes =>{
+            return cachesRes || fetch(evt.request)
+        })
+    )
+})
