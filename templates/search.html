@@ -11,25 +11,37 @@
     <br>
 <center>
     <img src="/static/imgs/{{img}}" width="300" height="200" alt="">
+    <div id="html"></div>
 </center>
 <div>
   published by: <a href="/user?q={{ by }}">{{ by }}</a>
   <p class="rate">
     <a href="/like?q=1&by={{by}}"><i class="material-icons">thumb_up</i></a>
     <a href="/"><i class="material-icons">thumb_down</i></a>
-  </p>  
+  </p>
 </div>
 
 <script>
     var post= "{{post}}"
+    var html = "{{ html }}"
     console.log(post)
     var i = 0
     while (i < 1000) {
+
+      post=post.replace("&lt;html&gt;","").replace("&lt;","<").replace("&gt;",">").replace("&#34;",'"')
+
       post=post.replace("&lt;br&gt;","<br>").replace("**","<b>").replace("/**","</b>").replace("&lt;u","<u>").replace("/u&gt;","</u>")
       .replace('&lt;cr','<p style="color: red;">').replace('&lt;cb','<p style="color: blue;">').replace('&lt;cg','<p style="color: green;">')
-      .replace('/c&gt;',"</p>").replace('&lt;l','<a target=blank style="color: red; text-decoration: underline;" href="').replace(';;','">').replace("/l&gt;","</a>")
+      .replace('/c&gt;',"</p>").replace('&lt;l','<a target=blank style="color: red; text-decoration: underline;" href="').replace(';;','">')
+      .replace("/l&gt;","</a>").replace("&lt;v ",'<iframe width="789" height="444" src="').replace(" /v&gt;",'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+      
+      
+
+      html=html.replace("&lt;","<").replace("&gt;",">").replace("&#34;",'"')
+
       i++
     }
+    document.getElementById("html").innerHTML = html
     document.getElementById("post").innerHTML = post
 </script>
 

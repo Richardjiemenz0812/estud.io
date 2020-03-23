@@ -31,6 +31,9 @@ def index():
 
 @app.route('/login')
 def login():
+    q=request.args.get("q")
+    if q == "1":
+        return render_template("login.html",msg="Wrong user or password")
     if "user" in session:
         user=session["user"]
         if user != None:
@@ -127,12 +130,11 @@ def loginp():
                         print("access")
                         session["user"]= user
                         return redirect("/login")
-    return redirect('/login')
+    return redirect('/login?q=1')
 
 @app.route("/test")
 def test():
-    
-    return session["user"]
+    return render_template("test.html")
 
 @app.route('/search')
 def search():
@@ -147,7 +149,12 @@ def search():
         img=str(img).replace("[b'","").replace("']","")
     except:
         pass
-    print()
+    #try:
+    #    html=r.lrange(q,-1,-1)
+    #    html=str(html).replace("[b'","").replace("']","")
+    #except:
+    #    pass
+    #print()
     return render_template('search.html',title=q,post=con,img=img,by=by[1])
     
 @app.route('/add')
@@ -161,19 +168,34 @@ def add():
 
 @app.route('/addf', methods=['POST'])
 def addf():
-    user=str(session["user"])
-    print(user)
+    rd=r.scan()
     title=request.form.get('title')
-    post=request.form.get('post')
-    r.lpush(title,user,title,post)
-    try:
-        fname=str(random.random()) + ".jpg"
-        f = request.files['file']
-        f.save(os.path.join("static/imgs",fname))
-        r.lpush(title,fname)
-    except:
-        pass
-    return redirect('/')
+    list=str(rd).replace("(0, [b","").replace("])","").replace(", b","").replace("","").replace("(0, [","").split("'")
+    print(list)
+    if title in list:
+        return "<h1>Ya hay un post con ese nombre,<br> por favor ve hacia atras y usa otro nombre</h1>"
+    else:
+        user=str(session["user"])
+        print(user)
+        title=request.form.get('title')
+        post=request.form.get('post')
+        r.lpush(title,user,title,post)
+        try:
+            fname=str(random.random()) + ".jpg"
+            f = request.files['file']
+            if f != None:
+                f.save(os.path.join("static/imgs",fname))
+                r.lpush(title,fname)
+        except:
+            pass
+        
+        try:
+            html=request.form.get('html')
+            r.rpush(title,html)
+            print(html)
+        except:
+            print("error")
+        return redirect('/')
 
 @app.route("/like")
 def like():

@@ -93,7 +93,7 @@ body,html{
   border-radius: 15px 50px;
 }
 #post{
-  margin: 1%;
+  margin: 3px;
 }
 
 .cont{
@@ -141,4 +141,5 @@ textarea{
   #post{margin: 5px; margin-left: 10px;}
   .post{margin: 0;}
   .rate{position: unset;}
+  #html{padding: 50px;}
 }
