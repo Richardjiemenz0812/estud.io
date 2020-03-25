@@ -22,23 +22,7 @@ path_folder='static/imgs'
 
 @app.route('/')
 def index():
-    rd=r.scan()
-    list=str(rd).replace("(0, [b","").replace("])","").replace(", b","").replace("","").replace("(0, [","").split("'")
-    print(list)
-    pl=""
-    for i in list:
-        print(i)
-        print(r.type(i))
-        print("---------------------")
-        if i != "":
-            type=r.type(i)
-            type=str(type)
-            if type == "b'list'":
-                print("es una lista!")
-                pl=str(pl) + i + ","
-    print(pl)
-    pl=pl.split(",")
-    return render_template("index.html",list=pl)
+    return "Hello"
 
 ###############
 # LOGIN ROUTE #
