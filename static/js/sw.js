@@ -8,16 +8,27 @@ const files = [
     '/static/bg.jpg'
 ]
 
-self.addEventListener("install",evt =>{
+self.addEventListener("install",event =>{
+    console.log("yolo")
     caches.open("cache").then(cache =>{
         cache.addAll(files)
     })
 })
 
-self.addEventListener("fetch",evt =>{
-    evt.respondWith(
-        caches.match(evt.request).then(cachesRes =>{
-            return cachesRes || fetch(evt.request)
-        })
+self.addEventListener('activate', (event) => {
+    console.log('👷', 'activate', event);
+    return self.clients.claim();
+  });
+
+  self.addEventListener('fetch', function(event) {
+    console.log("fetch")
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => response || fetch(event.request))
+            .catch(() =>{
+                if (event.request.mode == 'navigate'){
+                    return caches.match("/")
+                }
+            })
     )
-})
+  });

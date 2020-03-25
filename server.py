@@ -1,13 +1,24 @@
+############
+# ESTUD.IO #
+############
 from flask import *
 from flask_redis import FlaskRedis
 import random
 import os
+
+##############
+# APP CONFIG #
+##############
 
 app = Flask(__name__)
 r=FlaskRedis(app)
 app.secret_key = "key"
 
 path_folder='static/imgs'
+
+###############
+# INDEX ROUTE #
+###############
 
 @app.route('/')
 def index():
@@ -29,6 +40,10 @@ def index():
     pl=pl.split(",")
     return render_template("index.html",list=pl)
 
+###############
+# LOGIN ROUTE #
+###############
+
 @app.route('/login')
 def login():
     q=request.args.get("q")
@@ -41,7 +56,42 @@ def login():
     else:
         return render_template("/login.html")
 
+@app.route('/login',methods=['POST'])
+def loginp():
+    user=request.form.get('user')
+    pwd=request.form.get('pwd')
+    print("--------------------------------")
+    print(user)
+    print(pwd)
+    print("--------------------------------")
+    rd=r.scan()
+    list=str(rd).replace("(0, [b","").replace("])","").replace(", b","").replace("","").replace("(0, [","").split("'")
+    print(list)
+    pl=""
+    for i in list:
+        print(i)
+        print(r.type(i))
+        print("---------------------")
+        if i != "":
+            type=r.type(i)
+            type=str(type)
+            if type == "b'hash'":
+                print("es un hash!")
+                user="user:"+user
+                if user in list:
+                    print("yessssssssssssssssssss")
+                    print(user)
+                    print(r.hget(user,"pwd"))
+                    p=str(r.hget(user,"pwd")).replace("b'","").replace("'","")
+                    if p == pwd:
+                        print("access")
+                        session["user"]= user
+                        return redirect("/login")
+    return redirect('/login?q=1')
 
+############
+# PROFILE #
+###########
 @app.route("/profile")
 def profile():
     if "user" in session:
@@ -99,43 +149,16 @@ def profile():
     else:
         return redirect("/login")
 
-@app.route('/login',methods=['POST'])
-def loginp():
-    user=request.form.get('user')
-    pwd=request.form.get('pwd')
-    print("--------------------------------")
-    print(user)
-    print(pwd)
-    print("--------------------------------")
-    rd=r.scan()
-    list=str(rd).replace("(0, [b","").replace("])","").replace(", b","").replace("","").replace("(0, [","").split("'")
-    print(list)
-    pl=""
-    for i in list:
-        print(i)
-        print(r.type(i))
-        print("---------------------")
-        if i != "":
-            type=r.type(i)
-            type=str(type)
-            if type == "b'hash'":
-                print("es un hash!")
-                user="user:"+user
-                if user in list:
-                    print("yessssssssssssssssssss")
-                    print(user)
-                    print(r.hget(user,"pwd"))
-                    p=str(r.hget(user,"pwd")).replace("b'","").replace("'","")
-                    if p == pwd:
-                        print("access")
-                        session["user"]= user
-                        return redirect("/login")
-    return redirect('/login?q=1')
-
+########
+# TEST #
+########
 @app.route("/test")
 def test():
     return render_template("test.html")
 
+########
+# TEST #
+########
 @app.route('/search')
 def search():
     q=request.args.get('q')
@@ -156,7 +179,9 @@ def search():
     #    pass
     #print()
     return render_template('search.html',title=q,post=con,img=img,by=by[1])
-    
+#######
+# ADD #
+#######
 @app.route('/add')
 def add():
     if "user" in session:
@@ -197,6 +222,9 @@ def addf():
             print("error")
         return redirect('/')
 
+########
+# LIKE #
+########
 @app.route("/like")
 def like():
     if "user" in session:
@@ -217,6 +245,9 @@ def like():
     else:
         return redirect("/add")
 
+##############
+# CHANGE PWD #
+##############
 @app.route("/chpwd", methods=["POST"])
 def chpwd():
     user=session['user']
@@ -228,6 +259,9 @@ def chpwd():
 def sw():
     return app.send_static_file("/static/js/sw.js")
 
+###########
+# LOG OUT #
+###########
 @app.route("/logout")
 def logout():
     user=session['user']
@@ -235,6 +269,9 @@ def logout():
     res.set_cookie("session",user,0)
     return res
 
+########
+# USER #
+########
 @app.route("/user")
 def user():
     user=request.args.get("q")
@@ -283,6 +320,10 @@ def user():
     n=len(y)
     n=n-1          
     return render_template("/view_profile.html",name=user_name,pts=user_pts,posts=y,n=n)
+
+############
+# DEL POST #
+############
 
 @app.route("/del_post")
 def del_post():
