@@ -398,3 +398,6 @@ def dell():
     else:
         return redirect("/login")
 
+@app.route("googlefddf2979fcb7aca7.html")
+def google():
+    return render_template("googlefddf2979fcb7aca7.html")
