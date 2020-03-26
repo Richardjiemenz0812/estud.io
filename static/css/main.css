@@ -3,7 +3,7 @@ body,html{
     height: 100%;
     margin: 0;
     font-family: 'Times New Roman',Cambria, Cochin, Georgia, Times, serif;
-    font-size: 20px;
+    font-size: 22px;
 }
 /***************************************banners******************************************************/
 .banner{
@@ -86,10 +86,12 @@ li a:hover {
 }
 /********************************************post styles******************************************************/
 .post{
-  margin-left: 21%;
+  margin-left: 18%;
   margin-right: 25%;
   margin: 10;
   display: block;
+  text-align: justify;
+  font-family: lato;
   /*border: 2px solid rgb(228, 219, 219);
   background-color: rgb(228, 219, 219);
   border-radius: 15px 50px;*/
