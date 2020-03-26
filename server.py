@@ -10,7 +10,6 @@ import os
 # APP CONFIG #
 ##############
 redisvar=os.environ["REDIS_URL"]
-print(redisvar)
 app = Flask(__name__)
 app.config["REDIS_URL"] = redisvar
 r=FlaskRedis(app)
@@ -146,8 +145,10 @@ def profile():
                         
             y=list2.split(",")
             n=len(y)
-            n=n-1           
-            return render_template("/profile.html",name=name,pwd=pwd,pts=pts,posts=y,n=n)
+            n=n-1
+            user=user.split(":")
+            user=str(user[1])
+            return render_template("/profile.html",name=name,pwd=pwd,pts=pts,posts=y,n=n,user=user)
     else:
         return redirect("/login")
 
@@ -224,6 +225,33 @@ def addf():
             print("error")
         return redirect('/')
 
+###########
+# SIGN UP #
+###########
+@app.route("/sign-up")
+def signup():
+    if "user" in session:
+        return redirect("/profile")
+    else:
+        return render_template("/signup.html")
+
+
+@app.route("/sign-up",methods=['POST'])
+def sign():
+    rd=r.scan()
+    list=str(rd).replace("(0, [b","").replace("])","").replace(", b","").replace("","").replace("(0, [","").split("'")
+    print(list)
+    name=request.form.get("user")
+    pwd=request.form.get("pwd")
+    user="user:"+str(name)
+    if user in list:
+        return render_template("/signup.html",msg="El nombre de usuario ya esta tomado, intenta otro nuevo")
+    else:
+        r.hset(user,"name",name)
+        r.hset(user,"pwd",pwd)
+        r.hset(user,"pts",0)
+        return redirect("/login")
+
 ########
 # LIKE #
 ########
@@ -255,7 +283,17 @@ def chpwd():
     user=session['user']
     pwd=request.form.get("pwd")
     r.hset(user,"pwd",pwd)
-    return redirect("/")
+    return redirect("/profile")
+
+###############
+# CHANGE NAME #
+###############
+@app.route("/chname",methods=['POST'])
+def chname():
+    user=session['user']
+    name=request.form.get("name")
+    r.hset(user,"name",str(name))
+    return redirect("/profile")
 
 @app.route("/sw.js")
 def sw():
@@ -320,8 +358,10 @@ def user():
                 
     y=list2.split(",")
     n=len(y)
-    n=n-1          
-    return render_template("/view_profile.html",name=user_name,pts=user_pts,posts=y,n=n)
+    n=n-1
+    user=user.split(":")
+    user=str(user[1])
+    return render_template("/view_profile.html",name=user_name,pts=user_pts,posts=y,n=n,user=user)
 
 ############
 # DEL POST #
@@ -400,8 +440,20 @@ def dell():
     else:
         return redirect("/login")
 
+##############################
+# google search console file #
+# DO NOT TOUCH THIS SECTION  #
+##############################
+
 @app.route("/googlefddf2979fcb7aca7.html")
 def google():
     return render_template("/googlefddf2979fcb7aca7.html")
+
+#################
+# Error handler #
+#################
+@app.errorhandler(404)
+def error(e):
+    return "<h1>Pagina no Encontrada error 404</h1>", 404
 
 #app.run(debug=True)

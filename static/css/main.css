@@ -144,5 +144,6 @@ textarea{
   .post{margin: 0; background: white; border-color: white;}
   .rate{position: unset;}
   #html{padding: 50px;}
+  iframe{width: 100%;}
 }
 /*#dd3e54 -- #6be585*/

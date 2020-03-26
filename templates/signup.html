@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<a href="/sign-up">sign up</a>
+<a href="/login">login</a>
 <center>
-    <h1>Login</h1>
+    <h1>Sign-up</h1>
     <p style="color: red;">{{ msg }}</p>
-    <form action="/login" method="post">
+    <form action="/sign-up" method="post">
         <h2>Name:</h2>
         <input type="text" name="user">
         <h2>Password:</h2>
