@@ -159,9 +159,9 @@ def profile():
 def test():
     return render_template("test.html")
 
-########
-# TEST #
-########
+##########
+# SEARCH #
+##########
 @app.route('/search')
 def search():
     q=request.args.get('q')
