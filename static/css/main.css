@@ -123,7 +123,7 @@ textarea{
   color: red;
 }
 
-.text{
+.text-banner{
   position: absolute;
   margin-left: 45%;
 }
@@ -150,6 +150,6 @@ textarea{
   .rate{position: unset;}
   #html{padding: 50px;}
   iframe{width: 100%;}
-  .text{position: unset; margin: 0;}
+  .text-banner{position: unset; margin: 0;}
 }
 /*#dd3e54 -- #6be585*/
