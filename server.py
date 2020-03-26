@@ -454,6 +454,6 @@ def google():
 #################
 @app.errorhandler(404)
 def error(e):
-    return "<h1>Pagina no Encontrada error 404</h1>", 404
+    return render_template("error.html"), 404
 
 #app.run(debug=True)
