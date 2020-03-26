@@ -9,8 +9,10 @@ import os
 ##############
 # APP CONFIG #
 ##############
-
+redisvar=os.environ["REDIS_URL"]
+print(redisvar)
 app = Flask(__name__)
+app.config["REDIS_URL"] = redisvar
 r=FlaskRedis(app)
 app.secret_key = "key"
 
@@ -398,6 +400,6 @@ def dell():
     else:
         return redirect("/login")
 
-@app.route("googlefddf2979fcb7aca7.html")
+@app.route("/googlefddf2979fcb7aca7.html")
 def google():
-    return render_template("googlefddf2979fcb7aca7.html")
+    return render_template("/googlefddf2979fcb7aca7.html")
