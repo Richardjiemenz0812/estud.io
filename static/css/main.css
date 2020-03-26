@@ -123,6 +123,11 @@ textarea{
   color: red;
 }
 
+.text{
+  position: absolute;
+  margin-left: 45%;
+}
+
 /***************************************************responsiveness**********************************/
 @media screen and (max-width: 1020px){
   .cont{margin-left: 10%;}
@@ -145,5 +150,6 @@ textarea{
   .rate{position: unset;}
   #html{padding: 50px;}
   iframe{width: 100%;}
+  .text{position: unset; margin: 0;}
 }
 /*#dd3e54 -- #6be585*/
