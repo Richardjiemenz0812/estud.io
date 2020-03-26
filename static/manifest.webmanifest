@@ -1,14 +1,14 @@
 {
     "name" : "Estud.io",
     "short_nane" : "estud.io",
-    "start_url" : "/",
+    "start_url" : "/profile",
     "display" : "standalone",
     "background_color" : "#4CAF50",
     "description" : "a learning app",
     "icons" : [
         {
-            "src": "/static/icon.png",
-            "sizes": "144x144",
+            "src": "/static/icon512.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ]
