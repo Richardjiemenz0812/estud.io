@@ -165,23 +165,28 @@ def test():
 @app.route('/search')
 def search():
     q=request.args.get('q')
-    con=r.lrange(q,1,1)
-    con=str(con).replace("[b'","").replace("']","").replace("\\r\\n","<br>").replace('[b"',"").replace('"]',"")
-    by=r.lrange(q,3,3)
-    by=str(by).replace("[b'","").replace("']","").split(":")
-    print(by)
     try:
-        img = r.lrange(q,0,0)
-        img=str(img).replace("[b'","").replace("']","")
+        con=r.lrange(q,1,1)
+        con=str(con).replace("[b'","").replace("']","").replace("\\r\\n","<br>").replace('[b"',"").replace('"]',"")
+        by=r.lrange(q,3,3)
+        by=str(by).replace("[b'","").replace("']","").split(":")
+        print(by)
+        try:
+            img = r.lrange(q,0,0)
+            img=str(img).replace("[b'","").replace("']","")
+        except:
+            pass
+        #try:
+        #    html=r.lrange(q,-1,-1)
+        #    html=str(html).replace("[b'","").replace("']","")
+        #except:
+        #    pass
+        #print()
+        return render_template('search.html',title=q,post=con,img=img,by=by[1])
     except:
         pass
-    #try:
-    #    html=r.lrange(q,-1,-1)
-    #    html=str(html).replace("[b'","").replace("']","")
-    #except:
-    #    pass
-    #print()
-    return render_template('search.html',title=q,post=con,img=img,by=by[1])
+    return render_template("error.html")
+    
 #######
 # ADD #
 #######
