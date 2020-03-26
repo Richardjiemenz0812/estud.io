@@ -404,4 +404,4 @@ def dell():
 def google():
     return render_template("/googlefddf2979fcb7aca7.html")
 
-app.run(debug=True)
+#app.run(debug=True)
