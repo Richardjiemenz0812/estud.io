@@ -129,7 +129,7 @@ textarea{
   position: absolute;
   margin-left: 45%;
 }
-
+/**********************************************FOOTER******************************************************/
 .foodiv{
   margin-left: 4%;
   background: #111;
@@ -141,12 +141,6 @@ textarea{
   float: left;
   width: 33.33%;
   margin-top: 1%;
-}
-.cont h1{
-  display: inline;
-}
-footer h2{
-  display: inline;
 }
 
 footer a{

@@ -425,8 +425,8 @@ def del_post():
             y=list2.split(",")
             n=len(y)
             n=n-1
-            user=ulist           
-            return render_template("/profile_del.html",name=name,pwd=pwd,pts=pts,posts=y,n=n,user=ulist)
+            user=session["user"]          
+            return render_template("/profile_del.html",name=name,pwd=pwd,pts=pts,posts=y,n=n,user=user)
     else:
         return redirect("/login")
 
@@ -435,7 +435,10 @@ def dell():
     if "user" in session:
         user=session["user"]
         q=request.args.get("q")
-        u=request.args.get("user")
+        u=r.lrange(q,3,3)
+        u=str(u).replace("[b'","").replace("']","")
+        print(user)
+        print(u)
         if u == user:
             r.delete(q)
             return redirect("/profile")
