@@ -144,7 +144,7 @@ textarea{
   .banner-text a{color: #4CAF50;}
   .banner2{height: 30%;}
   .banner-text2{text-align: center; top: 20%; text-decoration: none; color: white;}
-  .cont{margin-left: 0%; margin-bottom: 10%;}
+  .cont{margin-left: 1%; margin-bottom: 10%; margin-right: 1%;}
   #right{float: right;}
   #center{margin-left: 43%;}
   #post{margin: 5px; margin-left: 10px;}
