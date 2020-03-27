@@ -68,7 +68,6 @@ def loginp():
     rd=r.scan()
     list=str(rd).replace("(0, [b","").replace("])","").replace(", b","").replace("","").replace("(0, [","").split("'")
     print(list)
-    pl=""
     for i in list:
         print(i)
         print(r.type(i))
@@ -461,4 +460,4 @@ def google():
 def error(e):
     return render_template("error.html"), 404
 
-#app.run(debug=True)
+app.run(debug=True)

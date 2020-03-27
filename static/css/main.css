@@ -111,7 +111,7 @@ li a:hover {
 }
 
 .rate a{
-  color: rgb(28, 99, 25);
+  color: #dd3e54;
 }
 li{
   list-style-type: none;
@@ -130,6 +130,28 @@ textarea{
   margin-left: 45%;
 }
 
+.foodiv{
+  margin-left: 4%;
+  background: #111;
+  color: white;
+  height: 25%;
+}
+
+.fdiv{
+  float: left;
+  width: 33.33%;
+}
+.cont h1{
+  display: inline;
+}
+footer h2{
+  display: inline;
+}
+
+footer a{
+  margin-left: 2%;
+}
+
 /***************************************************responsiveness**********************************/
 @media screen and (max-width: 1020px){
   .cont{margin-left: 10%;}
@@ -143,7 +165,7 @@ textarea{
   .banner-text{top: 30%;}
   .banner-text a{color: #4CAF50;}
   .banner2{height: 30%;}
-  .banner-text2{text-align: center; top: 20%; text-decoration: none; color: white;}
+  .banner-text2{text-align: center; top: 30%; text-decoration: none; color: white;}
   .cont{margin-left: 1%; margin-bottom: 10%; margin-right: 1%;}
   #right{float: right;}
   #center{margin-left: 43%;}
@@ -153,5 +175,11 @@ textarea{
   #html{padding: 50px;}
   iframe{width: 100%;}
   .text-banner{position: unset; margin: 0;}
+  footer{ padding-bottom: 20%;}
+  footer p{margin: 0;}
+  .footer-column{width: 100%; float: none;}
+  .fdiv{float: none; margin: 0; width: 100%;}
+  .foodiv{margin: 0;height: 40%;}
 }
+
 /*#dd3e54 -- #6be585*/
