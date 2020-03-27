@@ -140,6 +140,7 @@ textarea{
 .fdiv{
   float: left;
   width: 33.33%;
+  margin-top: 1%;
 }
 .cont h1{
   display: inline;
@@ -180,6 +181,7 @@ footer a{
   .footer-column{width: 100%; float: none;}
   .fdiv{float: none; margin: 0; width: 100%;}
   .foodiv{margin: 0;height: 40%;}
+  .footer a{margin-left: 0;}
 }
 
 /*#dd3e54 -- #6be585*/
