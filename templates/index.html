@@ -17,9 +17,12 @@
 <body>
     <div id="nav-bar">
         <ul id="ul-nav">
-            <li class="li-nav" id="active""><a href="/"><i class="material-icons">home</i></a></li>
-            <li class="li-nav" id="center"><a href="/add"><i class="material-icons">add</i></a></li>
-            <li class="li-nav" id="right"><a href="/login"><i class="material-icons">face</i></a></li>
+            <li id="menu"><a onclick="menu()"><i class="material-icons">menu</i></a></li>
+            <div id="list">
+                <li class="li-nav" id="active""><a href="/"><i class="material-icons">home</i> <div id="pp1">home</div> </a></li>
+                <li class="li-nav" id="center"><a href="/add"><i class="material-icons">add</i> <div id="pp2">add</div> </a></li>
+                <li class="li-nav" id="right"><a href="/login"><i class="material-icons">face</i> <div id="pp3">profile</div> </a></li>
+            </div>
         </ul>
     </div>
     <header class="banner">
@@ -64,5 +67,6 @@
         </footer>
         <br>
     </div>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
